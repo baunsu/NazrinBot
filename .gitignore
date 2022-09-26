@@ -1,0 +1,4 @@
+node_modules/
+.env
+payloads.json
+.DS_Store
