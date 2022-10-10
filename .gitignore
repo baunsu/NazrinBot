@@ -1,5 +1,5 @@
 node_modules/
 .env
-src/config.json
+config.json
 payloads.json
 .DS_Store
