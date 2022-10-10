@@ -50,7 +50,7 @@ client.on("messageCreate", (message) => {
         message.react("<:lolicon:1022021897157869588>");
     }
     const validExtensins = [".png", ".jpg", ".mp4", ".mov", ".webm"];
-    const memeChannals = ["876810952039878728", "950912874266652702", "950912897335328848", "448335060006076416"];
+    const memeChannals = ["876810952039878728", "950912874266652702", "950912897335328848"];
     
     memeChannals.forEach(channel => {
         if (message.channelId === channel) {
