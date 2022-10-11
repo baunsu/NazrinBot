@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "description": "",
-  "type": "module",
+  "type": "commonjs",
   "devDependencies": {
     "dotenv": "^16.0.3"
   }
