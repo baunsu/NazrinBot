@@ -9,7 +9,6 @@ config();
 const TOKEN = process.env.BOT_TOKEN;
 const CLIENT_ID = process.env.BOT_CLIENT_ID;
 const GUILD_ID = process.env.BOT_GUILD_ID;
-// const __dirname = path.dirname(fileURLToPath(const.meta.url));
 
 const { Guilds, GuildMessages, GuildMembers, GuildMessageReactions, MessageContent } = GatewayIntentBits;
 
