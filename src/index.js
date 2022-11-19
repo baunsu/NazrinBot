@@ -1,8 +1,13 @@
-const { config } = require('dotenv') ;
-const { Client, GatewayIntentBits, Collection, Guild, Routes } = require('discord.js');
-const fs = require('node:fs') ;
-const path = require('node:path') ;
-// const { fileURLToPath } = require('node:url');
+const { config } = require("dotenv");
+const {
+	Client,
+	GatewayIntentBits,
+	Collection,
+	Guild,
+	Routes,
+} = require("discord.js");
+const fs = require("node:fs");
+const path = require("node:path");
 
 config();
 
@@ -10,21 +15,29 @@ const TOKEN = process.env.BOT_TOKEN;
 const CLIENT_ID = process.env.BOT_CLIENT_ID;
 const GUILD_ID = process.env.BOT_GUILD_ID;
 
-const { Guilds, GuildMessages, GuildMembers, GuildMessageReactions, MessageContent } = GatewayIntentBits;
+const {
+	Guilds,
+	GuildMessages,
+	GuildMembers,
+	GuildMessageReactions,
+	MessageContent,
+} = GatewayIntentBits;
 
 const client = new Client({
-    intents: [
-        Guilds,
-        GuildMessages,
-        GuildMembers,
-        GuildMessageReactions,
-        MessageContent
-    ]
+	intents: [
+		Guilds,
+		GuildMessages,
+		GuildMembers,
+		GuildMessageReactions,
+		MessageContent,
+	],
 });
 
 client.commands = new Collection();
-const commandsPath = path.join(__dirname, 'commands');
-const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+const commandsPath = path.join(__dirname, "commands");
+const commandFiles = fs
+	.readdirSync(commandsPath)
+	.filter((file) => file.endsWith(".js"));
 
 for (const file of commandFiles) {
 	const filePath = path.join(commandsPath, file);
@@ -34,31 +47,36 @@ for (const file of commandFiles) {
 	client.commands.set(command.data.name, command);
 }
 
-const eventsPath = path.join(__dirname, 'events');
-const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
+const eventsPath = path.join(__dirname, "events");
+const eventFiles = fs
+	.readdirSync(eventsPath)
+	.filter((file) => file.endsWith(".js"));
 
 for (const file of eventFiles) {
-    const filePath = path.join(eventsPath, file);
-    const event = require(filePath);
-    if(event.once) {
-        client.once(event.name, (...args) => event.execute(...args));
-    } else {
-        client.on(event.name, (...args) => event.execute(...args));
-    }
+	const filePath = path.join(eventsPath, file);
+	const event = require(filePath);
+	if (event.once) {
+		client.once(event.name, (...args) => event.execute(...args));
+	} else {
+		client.on(event.name, (...args) => event.execute(...args));
+	}
 }
 
-client.on('interactionCreate', async interaction => {
+client.on("interactionCreate", async (interaction) => {
 	if (!interaction.isChatInputCommand()) return;
 
 	const command = interaction.client.commands.get(interaction.commandName);
 
-    if (!command) return;
+	if (!command) return;
 
 	try {
 		await command.execute(interaction);
 	} catch (error) {
 		console.error(error);
-		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+		await interaction.reply({
+			content: "There was an error while executing this command!",
+			ephemeral: true,
+		});
 	}
 });
 
