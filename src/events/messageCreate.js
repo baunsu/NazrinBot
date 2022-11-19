@@ -1,6 +1,8 @@
 module.exports = {
 	name: 'messageCreate',
 	execute(message) {
+        const botId = 1023800611889741824;
+
 		if(message.author.bot) return; 
 
         // if (message.author.id === "328927740617031691") {
@@ -19,5 +21,8 @@ module.exports = {
                 })
             }
         })
-	},
+        if (message.mentions.has(message.client.user.id)) {
+            message.channel.send(`<@${message.author.id}>, :)`);
+        }	
+    },
 };
