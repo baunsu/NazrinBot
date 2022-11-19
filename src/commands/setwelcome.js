@@ -10,12 +10,17 @@ module.exports = {
 		let currentChannel = interaction.channelId;
 		let currentGuild = interaction.guildId;
 
-		let welcomeChannels = path.join(__dirname, "welcome-channels.json");
-		let data = JSON.parse(fs.readFileSync(welcomeChannels).toString());
+		let welcomeChannels = path.join(
+			__dirname,
+			"..\\data\\welcome-channels.json"
+		);
+		let welcomeData = JSON.parse(
+			fs.readFileSync(welcomeChannels).toString()
+		);
 
 		let addedChannel = false;
 		let sameGuild = false;
-		data.channels.map((element) => {
+		welcomeData.channels.map((element) => {
 			if (element.currentChannel == currentChannel) {
 				addedChannel = true;
 			}
@@ -26,9 +31,9 @@ module.exports = {
 
 		const addChannel = () => {
 			let welcomeChannel = { currentGuild, currentChannel };
-			data.channels.push(welcomeChannel);
+			welcomeData.channels.push(welcomeChannel);
 
-			fs.writeFileSync(welcomeChannels, JSON.stringify(data));
+			fs.writeFileSync(welcomeChannels, JSON.stringify(welcomeData));
 		};
 
 		if (addedChannel) {
@@ -37,12 +42,12 @@ module.exports = {
 		} else {
 			if (sameGuild) {
 				let pos = -1;
-				data.channels.map((element) => {
+				welcomeData.channels.map((element) => {
 					if (element.currentGuild == currentGuild) {
-						pos = data.channels.indexOf(element);
+						pos = welcomeData.channels.indexOf(element);
 					}
 				});
-				data.channels.splice(pos, pos + 1);
+				welcomeData.channels.splice(pos, pos + 1);
 			}
 
 			addChannel();

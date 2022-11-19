@@ -3,4 +3,4 @@ node_modules/
 config.json
 payloads.json
 .DS_Store
-src/commands/welcome-channels.json
+src/data
