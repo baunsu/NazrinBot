@@ -1,7 +1,7 @@
-const data = require("..\\data\\welcome-channels.json");
+const data = require("../data/welcome-channels.json");
 
 module.exports = {
-	name: "guildMemberAdd",
+	name: "guildMemberRemove",
 	execute(member) {
 		let welcome = data.channels.filter((item) => {
 			if (member.guild.id == item.currentGuild) {
@@ -12,7 +12,7 @@ module.exports = {
 			welcome[0].currentChannel
 		);
 
-		const welcomeMessage = `<@${member.id}> has joined ${member.guild.name}!`;
+		const welcomeMessage = `**${member.user.tag}** has left ${member.guild.name}...`;
 
 		welcomeChan.send({ content: welcomeMessage });
 	},
