@@ -14,7 +14,7 @@ module.exports = {
 		let memeData = JSON.parse(fs.readFileSync(memeChannels).toString());
 
 		let addedChannel = false;
-		let sameGuild = false;
+		
 		memeData.channels.map((element) => {
 			if (element.currentChannel == currentChannel) {
 				addedChannel = true;

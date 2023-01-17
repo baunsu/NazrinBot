@@ -11,9 +11,9 @@ module.exports = {
 			return item.currentChannel;
 		});
 
-		// if (message.author.id === "328927740617031691") {
-		//     message.react("1029256527254650942");
-		// }
+		if (message.author.id === "328927740617031691") {
+			message.react("1052898566911299674");
+		}
 		const validExtensins = [".png", ".jpg", ".mp4", ".mov", ".webm"];
 
 		memeChannels.forEach((channel) => {
