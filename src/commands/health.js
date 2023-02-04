@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
+const { health } = require("../functions/health");
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -29,14 +30,8 @@ module.exports = {
 		const LEVEL = interaction.options.getNumber("level");
 		const CON = interaction.options.getNumber("con");
 
-		let hp = HITDIE + CON;
-		let finalVal = 0;
+		let hp = health(HITDIE, LEVEL, CON);
 
-		for (let i = 1; i < LEVEL; i++) {
-			let rolledVal = Math.floor(Math.random() * HITDIE) + 1;
-			finalVal += rolledVal + CON;
-		}
-
-		await interaction.reply(`Total HP (Con ${CON}): **${finalVal + hp}**`);
+		await interaction.reply(`Total HP (Con ${CON}): **${hp}**`);
 	},
 };

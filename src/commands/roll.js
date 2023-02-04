@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
+const { roll } = require("../functions/roll");
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -29,19 +30,13 @@ module.exports = {
 		const NUM = interaction.options.getNumber("num");
 		let mod = 0;
 
-		if (interaction.options.getNumber("mod") != null) {
+		if (interaction.options.getNumber("mod") != null)
 			mod = interaction.options.getNumber("mod");
-		}
 
 		if (SIDES <= 0 || SIDES >= 1000)
 			await interaction.reply(`**${SIDES} is not valid.`);
 
-		let results = [];
-
-		for (let i = 1; i <= NUM; i++) {
-			let rolledVal = Math.floor(Math.random() * SIDES + 1);
-			results.push(rolledVal);
-		}
+		let results = roll(NUM, SIDES);
 
 		let finalVal =
 			results.reduce((accumulator, item) => accumulator + item) +
