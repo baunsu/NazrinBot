@@ -8,7 +8,9 @@ module.exports = {
 		.addNumberOption((option) =>
 			option
 				.setName("num")
-				.setDescription("The number of dice.")
+				.setDescription(
+					"The number of dice. Must be between 0 and 100."
+				)
 				.setRequired(true)
 		)
 		.addNumberOption((option) =>
@@ -33,8 +35,14 @@ module.exports = {
 		if (interaction.options.getNumber("mod") != null)
 			mod = interaction.options.getNumber("mod");
 
-		if (SIDES <= 0 || SIDES >= 1000)
-			await interaction.reply(`**${SIDES} is not valid.`);
+		if (SIDES < 1 || SIDES > 1000) {
+			await interaction.reply(`**${SIDES}** is not valid.`);
+			return;
+		}
+		if (NUM < 1 || NUM > 100) {
+			await interaction.reply(`Invalid number of dice.`);
+			return;
+		}
 
 		let results = roll(NUM, SIDES);
 
