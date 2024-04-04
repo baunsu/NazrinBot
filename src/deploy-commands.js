@@ -29,3 +29,7 @@ rest.put(Routes.applicationCommands(CLIENT_ID), { body: commands })
 		)
 	)
 	.catch(console.error);
+
+// rest.delete(Routes.applicationCommand(CLIENT_ID, "commandId"))
+// 	.then(() => console.log("Successfully deleted command."))
+// 	.catch(console.error);
